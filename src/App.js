@@ -26,6 +26,16 @@ function App(props) {
 
   const [mode, setMode] = useState("light");
   const [alert, setAlert] = useState(null)
+  const [btnStyle, setBtnStyle] = useState(
+    {
+      color: "black",
+      backgroundColor: "white"
+    }
+  )
+  const [btnTextStyle, setbtnTextStyle] = useState({
+    color: "black",
+    backgroundColor: "white"
+  })
 
   const showAlert = (message, type) => {
     setAlert({
@@ -36,21 +46,38 @@ function App(props) {
       setAlert(null);
     }, 2000);
   }
+
   const toggleMode = () => {
     if (mode === "light") {
+      setBtnStyle({
+        color: "white",
+        backgroundColor: "black"
+      })
       setMode("dark");
       document.body.style.backgroundColor = "black";
       showAlert("Dark Mode Enabled", "success");
       // document.body.style.color = "white";
+      setbtnTextStyle({
+        color: "black",
+        backgroundColor: "#999"
+      })
     }
     else {
       setMode("light")
       document.body.style.backgroundColor = "white";
       showAlert("Light Mode Enabled", "success");
-
+      setBtnStyle({
+        color: "black",
+        backgroundColor: "white"
+      })
+      setbtnTextStyle({
+        color: "black",
+        backgroundColor: "#fff"
+      })
       // document.body.style.color = "black";
     }
   }
+
 
 
   return (
@@ -61,7 +88,7 @@ function App(props) {
         <div className=" container">
           <Routes>
             <Route exact path="/" element={<TextArea showAlert={showAlert} heading="Try TextUtils - word counter, character counter, remove extra spaces" mode={mode} />}></Route>
-            <Route exact path='/about' element={<About />}>
+            <Route exact path='/about' element={<About btnStyle={btnStyle} btnTextStyle={btnTextStyle} />}>
             </Route>
             <Route exact path='*' element={<h1>ERROR! 404 Page Not Found</h1>}>
             </Route>
