@@ -2,6 +2,17 @@ textarea {
   resize: vertical;
   max-height: 200px;
 }
-button{
-  /* margin-left: 1rem; */
+
+.btns{
+display: flex;
+justify-content: center;
+}
+
+@media screen and (max-width: 500px) {
+  .btns{
+    /* margin-left: 1rem; */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
 }

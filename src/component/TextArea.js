@@ -7,6 +7,7 @@ export default function TextArea(props) {
 
     const handelChangeEvent = (e) => {
         setText(e.target.value);
+        console.log(text);
     }
     const handelUpEvent = () => {
         let val = text.toUpperCase();
@@ -50,19 +51,21 @@ export default function TextArea(props) {
                         color: props.mode === 'light' ? 'black' : 'white'
                     }} value={text} placeholder="Enter Text Here..." onChange={handelChangeEvent} id="myBox" rows="5"></textarea>
                 </div>
-                <button onClick={handelUpEvent} className="mx-2 btn btn-primary">Convert To UpperCase</button>
-                <button onClick={handelLwEvent} className="mx-2 btn btn-secondary">Convert To LowerCase</button>
-                <button onClick={handelRSEvent} className="mx-2 btn btn-warning">Remove All Spaces</button>
-                <button onClick={handelCLEvent} className="mx-2 btn btn-danger">Clear Box</button>
-                <button onClick={handelCopyEvent} className="mx-2 btn btn-success">Copy All Text</button>
+                <div className="btns">
+                    <button disabled={text.length == 0} onClick={handelUpEvent} className="my-1 mx-2 btn btn-primary">Convert To UpperCase</button>
+                    <button disabled={text.length === 0} onClick={handelLwEvent} className="my-1 mx-2 btn btn-secondary">Convert To LowerCase</button>
+                    <button disabled={text.length === 0} onClick={handelRSEvent} className="my-1 mx-2 btn btn-warning">Remove All Spaces</button>
+                    <button disabled={text.length === 0} onClick={handelCopyEvent} className="my-1 mx-2 btn btn-success">Copy All Text</button>
+                    <button disabled={text.length === 0} onClick={handelCLEvent} className="my-1 mx-2 btn btn-danger">Clear Box</button>
+                </div>
             </div>
             <div className="container mt-4" style={{
                 color: props.mode === 'light' ? 'black' : 'white'
             }}>
                 <h1>Your Summary...</h1>
-                <p>{text.split(" ").length} Words, {text.split("").length} Characters, {Math.floor((text.split(" ").length) / 2.0833333)}S Takes To Read...</p>
+                <p>{text.split(/\s/).filter((e) => { return e.length != 0 }).length} Words, {text.split("").length} Characters, {Math.floor((text.split(" ").length) / 2.0833333)}S Takes To Read...</p>
                 <h1 className='mt-1'>Overview Of Your Text...</h1>
-                <p>{text}</p>
+                <p>{text.length > 0?text:"Nothing To Preview..."}</p>
             </div>
         </>
     )
